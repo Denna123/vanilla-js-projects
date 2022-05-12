@@ -36,36 +36,55 @@ const Item = mongoose.model("Item", itemsSchema);
 
 const defaultItems = [item1, item2, item3];
 
-Item.insertMany(defaultItems, function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Successfully saved default items to DB");
-  }
-});
-
-// const items = ["Buy Food", "Cook Food", "Eat Food"];
-// const workItems = [];
-
 app.get("/", function(req, res) {
 
 
-  res.render("list", {listTitle: "Today", newListItems: items});
+
+  Item.find({}, function(err, foundItems) {
+
+  if (foundItems.length === 0) {
+    Item.insertMany(defaultItems, function(err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Successfully saved default items to DB");
+      }
+    });
+    res.redirect("/");
+  } else {
+    res.render("list", {listTitle: "Today", newListItems: foundItems});
+  }
+
+  });
 
 });
+
+app.get("/:customListName", function(req, res) {
+  const customListName = req.params.customListName;
+})
 
 app.post("/", function(req, res){
 
-  const item = req.body.newItem;
+  const itemName = req.body.newItem;
+  const item = new Item ({
+     name: itemName 
+   }); 
 
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  } else {
-    items.push(item);
-    res.redirect("/");
-  }
+   item.save();
+   res.redirect("/");
 });
+
+app.post("/delete", function(req, res) {
+  const checkedItemId = req.body.checlbox;
+
+  Item.findByIdAndRemove(checkedItemId, function(err) {
+    if (!err) {
+      console.log("Successfully deleted checked item.");
+      res.redirect("/");
+    }
+  })
+});
+
 
 app.get("/work", function(req,res){
   res.render("list", {listTitle: "Work List", newListItems: workItems});
