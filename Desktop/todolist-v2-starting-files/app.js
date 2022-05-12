@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todolistDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://admin-denna:5454@cluster0.kznws.mongodb.net/todolistDB", {useNewUrlParser: true});
 
 const itemsSchema = {
   name: String 
@@ -124,11 +124,12 @@ app.post("/delete", function(req, res) {
       }
     });
   } else {
-    List.findOneAndUpdate({name: listName}, {$pull: {items: {_id: checkedItemId}}}, function(err, foundList))
-    if (!err) {
-      res.redirect("/" + listName);
-    }
-  };
+    List.findOneAndUpdate({name: listName}, {$pull: {items: {_id: checkedItemId}}}, function(err, foundList){
+      if (!err) {
+        res.redirect("/" + listName);
+      }
+    })
+};
 });
 
 
