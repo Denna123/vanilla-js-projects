@@ -113,7 +113,7 @@ button:focus {
 
 .modal-container {
     background-color: rgba(0, 0, 0, 0.6);
-    /* display: none; */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -137,4 +137,36 @@ button:focus {
 .modal-header {
     background: var(--primary-color);
     color: #fff;
+    padding: 15px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    border-botton: 1px solid #333;
+}
+
+.modal-content {
+    padding: 20px;
+}
+
+.modal-form div {
+    margin: 15px 0;
+}
+
+.modal-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-form .form-input {
+    padding: 8px;
+    width: 100%;
+}
+
+.close-btn {
+    background: transparent;
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
