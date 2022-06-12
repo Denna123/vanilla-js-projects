@@ -13,7 +13,7 @@ for(var i = 0; i < boxes.length; i++) {
        if(!boxes[index].innerHTML)
             boxes[index].innerHTML = turn ? 'x' : 'o'
         
-        checkWin(index, turn)
+        checkWin(index, turn);
      });
   })(i);
 }
@@ -56,8 +56,6 @@ function checkWin(index, turn){
             box.innerHTML = ''
         }
     }
-
-    console.log("Play Again!!!")
 }
 
 
