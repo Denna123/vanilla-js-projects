@@ -2,6 +2,11 @@ const player1 = document.getElementsByClassName('player1');
 const player2 = document.getElementsByClassName('player2');
 
 var boxes = document.getElementsByClassName('box');
+const screens = document.querySelectorAll('.screen');
+const start_btn = document.getElementById('start-btn');
+
+
+start_btn.addEventListener('click', () => screens[0].classList.add('up'));
 
 var turn = true;
 
