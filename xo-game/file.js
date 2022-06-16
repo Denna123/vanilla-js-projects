@@ -1,3 +1,5 @@
+
+
 const player1 = document.getElementsByClassName('player1');
 const player2 = document.getElementsByClassName('player2');
 
